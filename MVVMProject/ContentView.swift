@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+    @StateObject var viewModel = UserViewModel()
+
+        var body: some View {
+            VStack {
+                List(viewModel.users) { user in
+                    Text(user.name)
+                }
+                Button("Verileri Getir") {
+                    viewModel.fetchUsers()
+                }
+            }
         }
-        .padding()
-    }
 }
 
 #Preview {
